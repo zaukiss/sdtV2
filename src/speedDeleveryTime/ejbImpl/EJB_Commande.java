@@ -1,0 +1,25 @@
+package speedDeleveryTime.ejbImpl;
+
+import javax.ejb.Stateless;
+
+import speedDeleveryTime.dataImpl.DataRequest;
+import speedDeleveryTime.dataImpl.DataResponse;
+import speedDeleveryTime.interfaces.EJB_Entity;
+import speedDeleveryTime.utils.Constants;
+
+@Stateless(mappedName=Constants.COMMANDE_MAPPED_NAME)
+public class EJB_Commande implements EJB_Entity {
+
+	@Override
+	public DataResponse processDao(DataRequest info) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void processListener(Object data, int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
