@@ -6,10 +6,13 @@ public class Constants {
 	
 	public static String SERVER_BEAN_IP_ADDRESS = "127.0.0.1";
 	public static String SERVER_BEAN_PORT = "3700";
+	public static final int DATA_BUFFER_SIZE = 1024;
+	public static int LINSTEN_ORDER_PORT = 0;
 	
 	public static final String LOGIN_MAPPED_NAME = "ejb/login";
 	public static final String COMMANDE_MAPPED_NAME = "ejb/commande";
 	public static final String MANAGER_MAPPED_NAME = "ejb/manager";
+	public static final String COMMANDE_LISTENER_MAPPED_NAME = "ejb/CommandeListener";
 	
 	public static String ENTITY_LOGIN_NAME = "LoginView";
 	public static String ENTITY_HOME_NAME = "MainScreen";
@@ -44,6 +47,9 @@ public class Constants {
 	public static final String ACTION_REQUEST_KEY= "actionRequest";
 	public static final String ACTION_RESPONSE_KEY= "actionResponse";
 	public static final String ACTION_RESPONSE_CONNECTION_RESULT = "connectionResult";
+	public static final String ACTION_RESPONSE_RECEIVE_NEW_ORDER_RESULT = "newOrderResult";
+	public static final String ACTION_REQUEST_NEW_ORDER_DATA = "newOrderData";
+	
 	public static final int NO_ACTION = -1;
 	
 	public static final int ACTION_REQUEST_DISPLAY_LOGIN_VIEW = 0;
@@ -51,6 +57,9 @@ public class Constants {
 	
 	public static final int ACTION_REQUEST_CONNECT_USER = 2;
 	public static final int ACTION_RESPONSE_CONNECT_USER = 3;
+	
+	public static final int ACTION_REQUEST_RECEIVE_NEW_ORDER = 4;
+	public static final int ACTION_RESPONSE_RECEIVE_NEW_ORDER = 5;
 	
 	
 	

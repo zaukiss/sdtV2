@@ -17,7 +17,8 @@ public class EJB_Commande implements EJB_Entity {
 	}
 
 	@Override
-	public void processListener(Object data, int id) {
+	public DataResponse processListener(DataRequest content) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

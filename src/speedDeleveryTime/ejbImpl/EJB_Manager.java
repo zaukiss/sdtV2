@@ -12,7 +12,8 @@ public class EJB_Manager implements EJB_Entity {
 
 
 	@Override
-	public void processListener(Object data, int id) {
+	public DataResponse processListener(DataRequest content) {
+		return null;
 	
 		
 	}

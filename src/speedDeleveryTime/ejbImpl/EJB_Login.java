@@ -14,12 +14,13 @@ public class EJB_Login implements EJB_Entity {
 
 	@Override
 	public DataResponse processDao(DataRequest info) {
+
 		return (new LoginDao()).getData(info);
 	}
 
 	@Override
-	public void processListener(Object data, int id) { 
-		// nothing 
+	public DataResponse processListener(DataRequest content) {
+		return null; 
 		
 	}
 

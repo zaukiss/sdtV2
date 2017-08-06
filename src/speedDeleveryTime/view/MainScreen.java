@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.Hashtable;
 
 import javax.swing.ImageIcon;
@@ -145,8 +146,6 @@ public class MainScreen extends JFrame implements IEntity_View {
 
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
-		gbc.weightx = 0;
-		gbc.weighty = 0;
 		gbc.gridx = 3;
 		gbc.gridy = 0;
 		_headerPanel.add(_iconright, gbc);	
@@ -160,11 +159,15 @@ public class MainScreen extends JFrame implements IEntity_View {
 		_middleHeader.add(_date, gbc2);
 
 		gbc3.fill = GridBagConstraints.NONE;
-		gbc3.weighty = 2;
+		gbc3.gridwidth = GridBagConstraints.REMAINDER; 
+		gbc3.gridheight = 1; 
+		gbc3.insets = new Insets(2,50, 2, 2);
 		gbc3.gridx = 0;
 		gbc3.gridy = 0;
 		_floatLeftPan.add(_plannifierComIcon, gbc3);
-
+		
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
 		gbc3.gridx = 0;
 		gbc3.gridy = 1;
 		_floatLeftPan.add(_statistiqueIcon, gbc3);
@@ -176,11 +179,12 @@ public class MainScreen extends JFrame implements IEntity_View {
 		gbc3.gridx = 0;
 		gbc3.gridy = 3;
 		_floatLeftPan.add(_modificationIcon, gbc3);
-
+		
 		gbc3.gridx = 0;
 		gbc3.gridy = 4;
 		_floatLeftPan.add(_visuaComIcon, gbc3);
-
+		
+		gbc3.gridheight = GridBagConstraints.REMAINDER;
 		gbc3.gridx = 0;
 		gbc3.gridy = 5;
 		_floatLeftPan.add(_visuaLivIcon, gbc3);
@@ -218,12 +222,12 @@ public class MainScreen extends JFrame implements IEntity_View {
 		_notifIcon.setPreferredSize(new Dimension(64, 50));
 		_userIcon.setPreferredSize(new Dimension(64, 61));
 		_iconCall.setPreferredSize(new Dimension(64,60));
-		_plannifierComIcon.setPreferredSize(new Dimension(64, 64));
-		_statistiqueIcon.setPreferredSize(new Dimension(64, 64));
-		_creationIcon.setPreferredSize(new Dimension(64, 64));
-		_modificationIcon.setPreferredSize(new Dimension(64, 64));
-		_visuaComIcon.setPreferredSize(new Dimension(64, 64));
-		_visuaLivIcon.setPreferredSize(new Dimension(64, 64));
+		_plannifierComIcon.setPreferredSize(new Dimension(60, 64));
+		_statistiqueIcon.setPreferredSize(new Dimension(60, 64));
+		_creationIcon.setPreferredSize(new Dimension(60, 64));
+		_modificationIcon.setPreferredSize(new Dimension(60, 64));
+		_visuaComIcon.setPreferredSize(new Dimension(60, 64));
+		_visuaLivIcon.setPreferredSize(new Dimension(60, 64));
 
 		setIconSet();
 

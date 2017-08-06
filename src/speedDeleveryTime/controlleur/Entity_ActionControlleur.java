@@ -3,6 +3,7 @@ package speedDeleveryTime.controlleur;
 import speedDeleveryTime.actionEntity.LoginAction;
 import speedDeleveryTime.dataImpl.DataRequest;
 import speedDeleveryTime.dataImpl.DataResponse;
+import speedDeleveryTime.listener.CommandeListener;
 import speedDeleveryTime.utils.Constants;
 import speedDeleveryTime.view.EntityLogin_View;
 
@@ -57,12 +58,19 @@ public class Entity_ActionControlleur extends Thread {
 				responses = lAct.execute(requests);
 				responses.put(Constants.ACTION_RESPONSE_KEY, Constants.ACTION_RESPONSE_CONNECT_USER);
 				if(responses.get(Constants.ACTION_RESPONSE_CONNECTION_RESULT) != null 
-						&& !((boolean) responses.get(Constants.ACTION_RESPONSE_CONNECTION_RESULT))){
+						&& ((boolean) responses.get(Constants.ACTION_RESPONSE_CONNECTION_RESULT))){
+					
+					(new CommandeListener()).start();
+					
+				}else{
 					
 					//TODO : add reason of connection failed to response
 					
 				}
 				break;
+			case Constants.ACTION_REQUEST_RECEIVE_NEW_ORDER:
+				System.out.println("new OrderReceive : "+ requests.get(Constants.ACTION_REQUEST_NEW_ORDER_DATA).toString());
+				continue;
 
 			}
 			synchronizedObj.setResponses(responses);

@@ -9,6 +9,6 @@ import speedDeleveryTime.dataImpl.DataResponse;
 public interface EJB_Entity {
 	
 	public DataResponse processDao(DataRequest info);
-	public void processListener(Object data, int id);
+	public DataResponse processListener(DataRequest content);
 
 }
