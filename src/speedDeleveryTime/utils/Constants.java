@@ -1,5 +1,6 @@
 package speedDeleveryTime.utils;
 
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 
 public class Constants {
@@ -23,8 +24,8 @@ public class Constants {
 	public static String ENTITY_LOGIN_KEY_PSEUDO_FIELD = "pseudoField";
 	public static String ENTITY_LOGIN_KEY_PASSWORD_FIELD = "passField";
 	
-	public static final int SCREEN_WIDTH = 900;
-	public static final int SCREEN_HEIGHT = 900;
+	public static final int SCREEN_WIDTH = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
+	public static final int SCREEN_HEIGHT = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
 	
 	public static final int HEADER_BUTTON_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width /4;
 	public static final int HEADER_BUTTON_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height /8;

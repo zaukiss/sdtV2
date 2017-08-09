@@ -7,9 +7,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.util.Hashtable;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -45,9 +46,9 @@ public class MainScreen extends JFrame implements IEntity_View {
 	private JLabel _userLogin;
 	private JLabel _date;
 	private ButtonListener _clickEventManager = new ButtonListener();;
-
+	private final int __MARGIN__BOTTOM__ =  40;
 	private MainScreen(){
-		
+
 		this.setTitle("Speed Delivery Time");
 		this.setSize(width, height);
 		this.setResizable(false);
@@ -55,7 +56,7 @@ public class MainScreen extends JFrame implements IEntity_View {
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.build();
-		
+
 	}
 	public static MainScreen getShared(){
 
@@ -76,7 +77,7 @@ public class MainScreen extends JFrame implements IEntity_View {
 	public void configure(Hashtable<String,Object> content) {
 
 		if(content != null){
-			
+
 			int action =  ((content.get(Constants.ACTION_RESPONSE_KEY) != null) ? (int) content.get(Constants.ACTION_RESPONSE_KEY)  : -1);
 			switch (action) {
 			case Constants.NO_ACTION:
@@ -91,7 +92,7 @@ public class MainScreen extends JFrame implements IEntity_View {
 			default:
 				break;
 			}
-			
+
 		}
 
 
@@ -121,7 +122,6 @@ public class MainScreen extends JFrame implements IEntity_View {
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		GridBagConstraints gbc2 = new GridBagConstraints();
-		GridBagConstraints gbc3 = new GridBagConstraints();
 
 		initButtonSet();
 		initPanelSet();
@@ -131,13 +131,14 @@ public class MainScreen extends JFrame implements IEntity_View {
 
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.weightx = 1;
+		gbc.weightx = 2;
 		gbc.weighty = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		_headerPanel.add(_setting,gbc);
 
-		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.weightx = GridBagConstraints.RELATIVE;
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
@@ -145,6 +146,7 @@ public class MainScreen extends JFrame implements IEntity_View {
 		_headerPanel.add(_middleHeader,gbc);
 
 		gbc.fill = GridBagConstraints.NONE;
+		gbc.weightx = GridBagConstraints.REMAINDER;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.gridx = 3;
 		gbc.gridy = 0;
@@ -158,36 +160,35 @@ public class MainScreen extends JFrame implements IEntity_View {
 		gbc2.gridy = 1;
 		_middleHeader.add(_date, gbc2);
 
-		gbc3.fill = GridBagConstraints.NONE;
-		gbc3.gridwidth = GridBagConstraints.REMAINDER; 
-		gbc3.gridheight = 1; 
-		gbc3.insets = new Insets(2,50, 2, 2);
-		gbc3.gridx = 0;
-		gbc3.gridy = 0;
-		_floatLeftPan.add(_plannifierComIcon, gbc3);
-		
-		gbc.gridwidth = 1;
-		gbc.gridheight = 1;
-		gbc3.gridx = 0;
-		gbc3.gridy = 1;
-		_floatLeftPan.add(_statistiqueIcon, gbc3);
+		//----------------------------------- icons left
 
-		gbc3.gridx = 0;
-		gbc3.gridy = 2;
-		_floatLeftPan.add(_creationIcon, gbc3);
+		//gbc3.gridx = 0;
+		//gbc3.gridy = 0;
+		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
+		_plannifierComIcon.setAlignmentX(CENTER_ALIGNMENT);
+		_floatLeftPan.add(_plannifierComIcon);
+		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
 
-		gbc3.gridx = 0;
-		gbc3.gridy = 3;
-		_floatLeftPan.add(_modificationIcon, gbc3);
-		
-		gbc3.gridx = 0;
-		gbc3.gridy = 4;
-		_floatLeftPan.add(_visuaComIcon, gbc3);
-		
-		gbc3.gridheight = GridBagConstraints.REMAINDER;
-		gbc3.gridx = 0;
-		gbc3.gridy = 5;
-		_floatLeftPan.add(_visuaLivIcon, gbc3);
+		_statistiqueIcon.setAlignmentX(CENTER_ALIGNMENT);
+		_floatLeftPan.add(_statistiqueIcon);
+		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
+
+		_creationIcon.setAlignmentX(CENTER_ALIGNMENT);
+		_floatLeftPan.add(_creationIcon);
+		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
+
+		_modificationIcon.setAlignmentX(CENTER_ALIGNMENT);
+		_floatLeftPan.add(_modificationIcon);
+		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
+
+		_visuaComIcon.setAlignmentX(CENTER_ALIGNMENT);
+		_floatLeftPan.add(_visuaComIcon);
+		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
+
+		_visuaLivIcon.setAlignmentX(CENTER_ALIGNMENT);
+		_floatLeftPan.add(_visuaLivIcon);
+		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
+
 		this.getContentPane().add(_headerPanel, BorderLayout.NORTH);
 		this.getContentPane().add(_floatLeftPan,BorderLayout.WEST);
 
@@ -296,20 +297,21 @@ public class MainScreen extends JFrame implements IEntity_View {
 
 		_middleHeader.setPreferredSize(new Dimension(Constants.HEADER_MIDDLE_PAN_WIDTH, 61));
 		_headerPanel.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH,85));
-		_floatLeftPan.setPreferredSize(new Dimension(256, Constants.SCREEN_HEIGHT -  _headerPanel.getHeight() ) );
-
-		GridBagLayout layout = new GridBagLayout();
-		_headerPanel.setLayout(layout);
-		_middleHeader.setLayout(layout);
-		_floatLeftPan.setLayout(layout);
+		_floatLeftPan.setPreferredSize(new Dimension(250, Constants.SCREEN_HEIGHT -  _headerPanel.getHeight() ) );
 
 		GridLayout gLay = new GridLayout(1, 3);
 		_iconright.setLayout(gLay);;
-		_iconright.setPreferredSize(new Dimension(192,61));
+		_iconright.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH - _middleHeader.getHeight() ,61));
 		_iconright.setOpaque(false);
 		_iconright.add(_userIcon);
 		_iconright.add(_notifIcon);
 		_iconright.add(_iconCall);
+
+		GridBagLayout layout = new GridBagLayout();
+
+		_headerPanel.setLayout(layout);
+		_middleHeader.setLayout(layout);
+		_floatLeftPan.setLayout(new BoxLayout(_floatLeftPan, BoxLayout.Y_AXIS));
 
 	}
 
