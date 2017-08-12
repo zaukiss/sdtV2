@@ -66,10 +66,11 @@ public class EntityManager_View extends JPanel implements IEntity_View {
 	@Override
 	public void configure(Hashtable<String,Object> content) {
 
-		if(content == null){
+		if(content == null){// TODO : here must set the home view for manager
 			this.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH- (MainScreen.getShared().get_floatLeftPanelWidth() + 20 ),
 					MainScreen.getShared().get_floatLeftPanelHeight() ));
-			//just for test not the home view for manager
+			
+			//just for test notify new order not the home view for manager
 			buildListOrderView();
 			
 
