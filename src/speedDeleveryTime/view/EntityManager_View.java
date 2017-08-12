@@ -69,6 +69,7 @@ public class EntityManager_View extends JPanel implements IEntity_View {
 		if(content == null){
 			this.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH- (MainScreen.getShared().get_floatLeftPanelWidth() + 20 ),
 					MainScreen.getShared().get_floatLeftPanelHeight() ));
+			//just for test not the home view for manager
 			buildListOrderView();
 			
 
