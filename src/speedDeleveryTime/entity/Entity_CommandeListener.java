@@ -27,13 +27,17 @@ public class Entity_CommandeListener implements IEntity {
 
 			ctx = new InitialContext(env);
 			e = (EJB_Entity) ctx.lookup(Constants.COMMANDE_LISTENER_MAPPED_NAME);
-			System.out.println("e = "+e);
 			dr = e.processListener(info);
+			
 			if(dr.get(Constants.ACTION_RESPONSE_RECEIVE_NEW_ORDER_RESULT) != null
 					&& (boolean)dr.get(Constants.ACTION_RESPONSE_RECEIVE_NEW_ORDER_RESULT)){
 				
 				Entity_ActionControlleur.getShared().setRequests(info);
 				return dr;
+			}else{
+				
+				System.out.println("Entity_CommandeListener.processBuissnessLogic : cannot do this cause :"+
+				"dr = "+dr.get(Constants.ACTION_RESPONSE_RECEIVE_NEW_ORDER_RESULT));
 			}
 			
 			

@@ -5,13 +5,12 @@ import speedDeleveryTime.dataImpl.DataRequest;
 import speedDeleveryTime.dataImpl.DataResponse;
 import speedDeleveryTime.listener.CommandeListener;
 import speedDeleveryTime.utils.Constants;
-import speedDeleveryTime.view.EntityLogin_View;
 
 public class Entity_ActionControlleur extends Thread {
 
 	private DataRequest requests;
 	private DataResponse responses;
-	
+
 	private static Entity_ActionControlleur shared = null;
 
 	public static Entity_ActionControlleur getShared(){
@@ -20,64 +19,72 @@ public class Entity_ActionControlleur extends Thread {
 		return shared;
 
 	}
-	
+
 	private Entity_ActionControlleur(){
-		
+
 		super();
-		
+
 	}
 
 	@Override
 	public void run() {
 
 		SynchObject synchronizedObj =  SynchObject.getShared();
+
 		while(true){
-			
+
 			System.out.println("Entity_ActionControlleur : wait for request");
 			requests = synchronizedObj.getRequests();
-			System.out.println("Entity_ActionControlleur : receive a request");
-			int actionRequest = (int) ((requests != null) ? requests.get(Constants.ACTION_REQUEST_KEY) : Constants.NO_ACTION);
-			switch(actionRequest){
+			new Thread(new Runnable() {
 
-			case Constants.NO_ACTION:
-				System.out.println("MainScreen.configure : nothing to do");
-				return;
+				@Override
+				public void run() {
+					synchronized (requests) {
 
-			case Constants.ACTION_REQUEST_DISPLAY_LOGIN_VIEW:
+						int actionRequest = (int) ((requests != null) ? requests.get(Constants.ACTION_REQUEST_KEY) : Constants.NO_ACTION);
+						System.out.println("Entity_ActionControlleur : receive a action : "+actionRequest);
+						switch(actionRequest){
 
-				responses = new DataResponse();
-				responses.put(Constants.ACTION_RESPONSE_KEY, Constants.ACTION_RESPONSE_DISPLAY_LOGIN_VIEW);
-				EntityLogin_View l =  new EntityLogin_View();
-				l.configure(null);
-				responses.put(Constants.ENTITY_LOGIN_NAME, l);
-				break;
-				
-			case Constants.ACTION_REQUEST_CONNECT_USER:
+						case Constants.NO_ACTION:
+							responses.put(Constants.ACTION_RESPONSE_KEY, Constants.NO_ACTION);
+							break;
 
-				LoginAction lAct = new LoginAction();
-				responses = lAct.execute(requests);
-				responses.put(Constants.ACTION_RESPONSE_KEY, Constants.ACTION_RESPONSE_CONNECT_USER);
-				if(responses.get(Constants.ACTION_RESPONSE_CONNECTION_RESULT) != null 
-						&& ((boolean) responses.get(Constants.ACTION_RESPONSE_CONNECTION_RESULT))){
-					
-					(new CommandeListener()).start();
-					
-				}else{
-					
-					//TODO : add reason of connection failed to response
-					
+						case Constants.ACTION_REQUEST_DISPLAY_LOGIN_VIEW:
+
+							responses = new DataResponse();
+							responses.put(Constants.ACTION_RESPONSE_KEY, Constants.ACTION_RESPONSE_DISPLAY_LOGIN_VIEW);
+							break;
+
+						case Constants.ACTION_REQUEST_CONNECT_USER:
+
+							LoginAction lAct = new LoginAction();
+							responses = lAct.execute(requests);
+							responses.put(Constants.ACTION_RESPONSE_KEY, Constants.ACTION_RESPONSE_CONNECT_USER);
+							if(responses.get(Constants.ACTION_RESPONSE_CONNECTION_RESULT) != null 
+									&& ((boolean) responses.get(Constants.ACTION_RESPONSE_CONNECTION_RESULT))){
+
+								(new CommandeListener()).start();
+							}
+							break;
+							
+						case Constants.ACTION_REQUEST_RECEIVE_NEW_ORDER:
+
+							responses.put(Constants.ACTION_RESPONSE_KEY, Constants.ACTION_RESPONSE_RECEIVE_NEW_ORDER);
+							responses.put(Constants.DATA_COMMANDE_CONTENT,requests.get(Constants.ACTION_REQUEST_NEW_ORDER_DATA));
+							break;
+						}
+						synchronizedObj.setResponses(responses);
+
+					}
+
+
 				}
-				break;
-			case Constants.ACTION_REQUEST_RECEIVE_NEW_ORDER:
-				System.out.println("new OrderReceive : "+ requests.get(Constants.ACTION_REQUEST_NEW_ORDER_DATA).toString());
-				continue;
+			}).start();
 
-			}
-			synchronizedObj.setResponses(responses);
 		}
 
 	}
-	
+
 	public synchronized void setRequests(DataRequest map){
 
 		requests =  map;

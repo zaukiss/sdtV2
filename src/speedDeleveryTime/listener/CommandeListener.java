@@ -36,17 +36,22 @@ public class CommandeListener extends Thread{
 				System.out.println("wait for order in : "+sock.getLocalAddress() + ":"+ Constants.LINSTEN_ORDER_PORT);
 				sock.receive(_datgrameReceiver);
 
-
 				byte[] contentReceive =  _datgrameReceiver.getData();
 				System.out.println("CommandeListener.notifyNew : receive some datas");
+				
 				if(contentReceive.length > 0){
 
-					System.out.println("CommandeListener.notifyNew : gonne send data");
+					System.out.println("CommandeListener.notifyNew : gonne write and notify");
 					DataRequest request =  new DataRequest();
 					request.put(Constants.ACTION_REQUEST_KEY, Constants.ACTION_REQUEST_RECEIVE_NEW_ORDER);
-					request.put(Constants.ACTION_REQUEST_NEW_ORDER_DATA, new String(contentReceive));
+					String str = new String(contentReceive);
+					request.put(Constants.ACTION_REQUEST_NEW_ORDER_DATA, str );
 					(new Entity_CommandeListener()).processBuissnessLogic(request);
 
+				}else{
+					
+					System.out.println("content is null...");
+					
 				}
 			}
 
@@ -59,7 +64,7 @@ public class CommandeListener extends Thread{
 		}
 
 	}
-
+	
 	public void stopListener(){
 
 		stopListener.set(true);

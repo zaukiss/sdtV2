@@ -45,6 +45,10 @@ public class Constants {
 	public static final String BUTTON_VISUALISER_COMMANDE= "visuliserCommnade";
 	public static final String BUTTON_VISUALISER_LIVREUR = "visuliserLivreur";
 	
+	public static final String MANAGER_COMPONENT_LIST_ORDER ="listOrderPanel" ;
+	public static final String MANAGER_COMPONENT_PANEL_LIST ="panelList" ;
+	public static final String DATA_COMMANDE_CONTENT = "orderContent";
+	
 	public static final String ACTION_REQUEST_KEY= "actionRequest";
 	public static final String ACTION_RESPONSE_KEY= "actionResponse";
 	public static final String ACTION_RESPONSE_CONNECTION_RESULT = "connectionResult";
@@ -61,8 +65,6 @@ public class Constants {
 	
 	public static final int ACTION_REQUEST_RECEIVE_NEW_ORDER = 4;
 	public static final int ACTION_RESPONSE_RECEIVE_NEW_ORDER = 5;
-	
-	
 	
 
 }

@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 
 import javax.swing.Box;
@@ -17,6 +19,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+
+import com.sun.msv.verifier.jarv.Const;
 
 import speedDeleveryTime.interfaces.IEntity_View;
 import speedDeleveryTime.utils.ButtonListener;
@@ -45,7 +51,8 @@ public class MainScreen extends JFrame implements IEntity_View {
 	private JPanel _headerPanel;
 	private JLabel _userLogin;
 	private JLabel _date;
-	private ButtonListener _clickEventManager = new ButtonListener();;
+	private ButtonListener _clickEventManager = new ButtonListener();
+	private LocalDate _localDate;
 	private final int __MARGIN__BOTTOM__ =  40;
 	private MainScreen(){
 
@@ -67,6 +74,15 @@ public class MainScreen extends JFrame implements IEntity_View {
 	@Override
 	public void updateView(Hashtable<String,Object> content) {
 
+			this.invalidate();
+			this.validate();
+			this.repaint();
+
+	}
+
+	@Override
+	public void hide() {
+
 
 	}
 
@@ -84,12 +100,21 @@ public class MainScreen extends JFrame implements IEntity_View {
 				System.out.println("MainScreen.configure : nothing to do");
 				break;
 			case Constants.ACTION_RESPONSE_DISPLAY_LOGIN_VIEW:
-				if( currentDisplay != null) currentDisplay.hide();
+
 				currentDisplay =  (IEntity_View) content.get(Constants.ENTITY_LOGIN_NAME);
-				this.getContentPane().add(((EntityLogin_View)currentDisplay).getView());
+				this.getContentPane().add(((EntityLogin_View)currentDisplay).getView(),BorderLayout.CENTER);
 				break;
 
-			default:
+			case Constants.ACTION_RESPONSE_CONNECT_USER:
+				if(currentDisplay != null ){
+
+					this.remove(currentDisplay.getView());
+
+				}
+				currentDisplay =  (IEntity_View) content.get(Constants.ENTITY_MANAGER_NAME);
+				JScrollPane managerListOrder = ((JScrollPane)((EntityManager_View)currentDisplay).getContent().get(Constants.MANAGER_COMPONENT_LIST_ORDER));
+				this.getContentPane().add(managerListOrder,BorderLayout.CENTER);
+				updateView(null);
 				break;
 			}
 
@@ -318,8 +343,9 @@ public class MainScreen extends JFrame implements IEntity_View {
 	private void initLabelSet(){
 
 		_userLogin = new JLabel("User : Test");
-		_date = new JLabel("Date :  17/1/2019");
-
+		_localDate = LocalDate.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		_date = new JLabel("Date : "+  _localDate.format(dtf));
 		_userLogin.setPreferredSize(new Dimension(100, 75));
 		_date.setPreferredSize(new Dimension(100, 75));
 		_userLogin.setFont(new Font("Arial", Font.BOLD , 24));
@@ -330,6 +356,26 @@ public class MainScreen extends JFrame implements IEntity_View {
 	}
 	public void setCurrentDisplay(IEntity_View currentDisplay) {
 		this.currentDisplay = currentDisplay;
+	}
+
+	public IEntity_View getCurrentDisplay(){
+
+		return currentDisplay;
+
+	}
+
+	public int get_floatLeftPanelHeight() {
+
+		return _floatLeftPan.getHeight();
+	}
+	public int get_floatLeftPanelWidth() {
+
+		return _floatLeftPan.getWidth();
+	}
+	@Override
+	public JPanel getView() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
