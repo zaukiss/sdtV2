@@ -44,6 +44,8 @@ public class Constants {
 	public static final String BUTTON_MODIFICATION = "Modifier";
 	public static final String BUTTON_VISUALISER_COMMANDE= "visuliserCommnade";
 	public static final String BUTTON_VISUALISER_LIVREUR = "visuliserLivreur";
+	public static final String BUTTON_VALIDE_ORDER = "validerCommande";
+	public static final String BUTTON_REMOVE_ORDER = "supprimerCommande";
 	
 	public static final String MANAGER_COMPONENT_LIST_ORDER ="listOrderPanel" ;
 	public static final String MANAGER_COMPONENT_PANEL_LIST ="panelList" ;

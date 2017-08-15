@@ -19,10 +19,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-
-import com.sun.msv.verifier.jarv.Const;
 
 import speedDeleveryTime.interfaces.IEntity_View;
 import speedDeleveryTime.utils.ButtonListener;
@@ -187,8 +184,6 @@ public class MainScreen extends JFrame implements IEntity_View {
 
 		//----------------------------------- icons left
 
-		//gbc3.gridx = 0;
-		//gbc3.gridy = 0;
 		_floatLeftPan.add(Box.createRigidArea(new Dimension(0,__MARGIN__BOTTOM__)));
 		_plannifierComIcon.setAlignmentX(CENTER_ALIGNMENT);
 		_floatLeftPan.add(_plannifierComIcon);

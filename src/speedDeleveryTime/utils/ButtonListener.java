@@ -64,6 +64,14 @@ public class ButtonListener implements ActionListener {
 			
 			break;
 			
+		case Constants.BUTTON_VALIDE_ORDER:
+			
+			break;
+			
+		case Constants.BUTTON_REMOVE_ORDER:
+			
+			break;
+			
 
 		}
 

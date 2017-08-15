@@ -35,6 +35,10 @@ public class EntityManager_View extends JPanel implements IEntity_View {
 
 				return;
 			case Constants.ACTION_RESPONSE_RECEIVE_NEW_ORDER:
+				
+				//TODO :  check if order list view is display.
+
+				//IF displayed do the following code  
 				if(content.get(Constants.DATA_COMMANDE_CONTENT) != null ){
 
 					ScrollPaneLine line =  new ScrollPaneLine((String)content.get(Constants.DATA_COMMANDE_CONTENT), 10);
@@ -49,6 +53,7 @@ public class EntityManager_View extends JPanel implements IEntity_View {
 					System.out.println("EntityManager_View.updateView :  no data to set");
 					
 				}
+				//ELSE turn on the corresponding icon
 				break;
 
 			}
